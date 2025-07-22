@@ -1,0 +1,19 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - vaultwarden_data:/data
+      - ./certs:/ssl:ro
+    environment:
+      DOMAIN: "https://localhost"
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+      ROCKET_TLS: '{certs="/ssl/vault.crt",key="/ssl/vault.key"}'
+      ROCKET_PORT: 443
+      DISABLE_ORGANIZATIONS: false
+
+volumes:
+  vaultwarden_data:
