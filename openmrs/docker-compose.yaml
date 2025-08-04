@@ -1,0 +1,28 @@
+services:
+  backend:
+    image: openmrs/openmrs-reference-application-3-backend:3.4.0
+    environment:
+      OMRS_CONFIG_DATABASE: mysql
+      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
+      OMRS_CONFIG_CONNECTION_SERVER: mariadb
+      OMRS_CONFIG_CONNECTION_USERNAME: root
+      OMRS_CONFIG_CONNECTION_PASSWORD: abc123
+      OPENMRS_DB_CREATE_TABLES: true
+    networks:
+      - php-docker-stack_default
+  frontend:
+    image: openmrs/openmrs-reference-application-3-frontend:3.4.0
+    environment:
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+    networks:
+      - php-docker-stack_default
+  gateway:
+    image: openmrs/openmrs-reference-application-3-gateway:3.4.0
+    ports:
+      - 80:80
+    networks:
+      - php-docker-stack_default
+networks:
+  php-docker-stack_default:
+    external: true

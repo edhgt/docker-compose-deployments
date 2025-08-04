@@ -1,0 +1,17 @@
+services:
+  openmrs:
+    image: openmrs/openmrs-reference-application-distro:latest
+    environment:
+      DB_DATABASE: openmrs
+      DB_HOST: mariadb
+      DB_USERNAME: root
+      DB_PASSWORD: abc123
+      DB_CREATE_TABLES: true
+    ports:
+      - 8080:8080
+    networks:
+      - php-docker-stack_default
+      
+networks:
+  php-docker-stack_default:
+    external: true
