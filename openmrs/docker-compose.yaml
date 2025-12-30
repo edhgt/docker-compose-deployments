@@ -8,6 +8,9 @@ services:
       OMRS_CONFIG_CONNECTION_USERNAME: root
       OMRS_CONFIG_CONNECTION_PASSWORD: abc123
       OPENMRS_DB_CREATE_TABLES: true
+      # OMRS_INITIAL_SETUP_MODEL: demo (este valor es por defecto y crea datos demo)
+      OMRS_INITIAL_SETUP_MODEL: empty
+      JAVA_TOOL_OPTIONS: "-Dhibernate.hbm2ddl.auto=create"
     networks:
       - php-docker-stack_default
   frontend:
