@@ -1,24 +1,26 @@
 services:
 
-  drupal:
-    container_name: drupal
+  drupal_intranet:
+    container_name: drupal_intranet
     image: drupal:11.3.2-php8.4-apache-bookworm
     ports:
-      - 8080:80
+      - 80:80
     volumes:
-      #- ~/development/php/drupal:/var/www/html
-      - drupal:/var/www/html
+      - ~/development/php/intranet:/var/www/html
+      #- drupal_intranet:/var/www/html
       #- drupal:/var/www/html/modules
       #- drupal:/var/www/html/profiles
       #- drupal:/var/www/html/themes
       #- drupal:/var/www/html/sites
     networks:
       - php-docker-stack_default
-
-volumes:
-  drupal:
-    name: drupal
+#    networks:
+#      - bridge
 
 networks:
   php-docker-stack_default:
     external: true
+
+#volumes:
+#  drupal_intranet:
+#    name: drupal_intranet
