@@ -1,0 +1,20 @@
+services:
+
+  joomla:
+    image: joomla:6.0.4-php8.4-apache
+    ports:
+      - 8081:80
+    environment:
+      JOOMLA_DB_HOST: mariadb
+      JOOMLA_DB_USER: root
+      JOOMLA_DB_PASSWORD: abc123
+      JOOMLA_DB_NAME: intranet_joomla
+    volumes:
+      - /home/edhernandez/development/php/intranet_joomla:/var/www/html
+      - ./custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    networks:
+      - php-docker-stack_default
+
+networks:
+  php-docker-stack_default:
+    external: true
