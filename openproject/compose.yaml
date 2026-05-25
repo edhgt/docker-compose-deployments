@@ -1,0 +1,22 @@
+services:
+
+  drupal:
+    container_name: openproject
+    image: openproject/openproject:17-rc
+    ports:
+      - 8080:80
+    volumes:
+      - drupal:/var/www/html
+      #- drupal:/var/www/html/modules
+      #- drupal:/var/www/html/profiles
+      #- drupal:/var/www/html/themes
+      #- drupal:/var/www/html/sites
+    networks:
+      - php-docker-stack_default
+
+networks:
+  php-docker-stack_default:
+    external: true
+
+volumes:
+  drupal:
