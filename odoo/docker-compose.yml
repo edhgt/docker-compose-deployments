@@ -1,0 +1,54 @@
+services:
+  # Servicio de PostgreSQL
+  db:
+    image: postgres:15
+    container_name: odoo_db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - odoo-network
+
+  # Servicio de Odoo
+  odoo:
+    image: odoo:19
+    container_name: odoo_app
+    depends_on:
+      - db
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+    restart: unless-stopped
+    networks:
+      - odoo-network
+
+# Volúmenes para persistencia de datos
+volumes:
+  odoo-db-data:
+    #driver: local
+    external: true
+    name: db_data_test
+  odoo-web-data:
+    #driver: local
+    external: true
+    name: odoo_data_test
+
+# Red para comunicación entre contenedores
+networks:
+  odoo-network:
+    driver: bridge
