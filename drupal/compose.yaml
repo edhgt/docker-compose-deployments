@@ -7,6 +7,7 @@ services:
       - 8080:80
     volumes:
       #- ~/development/php/drupal:/var/www/html
+      - ./tzone.ini:/usr/local/etc/php/conf.d/tzone.ini:ro
       - drupal:/var/www/html
       #- drupal:/var/www/html/modules
       #- drupal:/var/www/html/profiles
@@ -14,6 +15,8 @@ services:
       #- drupal:/var/www/html/sites
     networks:
       - php-docker-stack_default
+    environment:
+      - TZ=America/Guatemala
 
 volumes:
   drupal:

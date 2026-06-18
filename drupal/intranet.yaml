@@ -6,7 +6,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - ~/development/php/intranet:/var/www/html
+      - ./tzone.ini:/usr/local/etc/php/conf.d/tzone.ini:ro
+      - ~/development/projects/php/intranet:/var/www/html
       #- drupal_intranet:/var/www/html
       #- drupal:/var/www/html/modules
       #- drupal:/var/www/html/profiles
@@ -14,8 +15,8 @@ services:
       #- drupal:/var/www/html/sites
     networks:
       - php-docker-stack_default
-#    networks:
-#      - bridge
+    environment:
+      - TZ=America/Guatemala
 
 networks:
   php-docker-stack_default:
