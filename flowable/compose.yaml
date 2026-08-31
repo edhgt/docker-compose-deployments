@@ -1,0 +1,28 @@
+services:
+  flowable:
+
+    build:
+      context: /home/edhernandez/development/projects/java/flowable-engine
+      dockerfile: /home/edhernandez/development/infrastructure/docker/docker-compose-deployments/flowable/Dockerfile
+
+    environment:
+      DB_URL: jdbc:mariadb://mariadb:3306/flowable?useSSL=false&serverTimezone=America/Guatemala
+      DB_USER: root
+      DB_PASSWORD: abc123
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - /home/edhernandez/development/projects/java/flowable-engine:/src
+      - maven_repo:/root/.m2
+
+    networks:
+      - php-docker-stack_default
+
+networks:
+  php-docker-stack_default:
+    external: true
+
+volumes:
+  maven_repo:

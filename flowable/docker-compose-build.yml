@@ -1,0 +1,13 @@
+services:
+  builder:
+    image: maven:3.9-eclipse-temurin-21
+    working_dir: /workspace
+
+    volumes:
+      - .:/workspace
+      - maven_repo:/root/.m2
+
+    command: mvn clean install -DskipTests
+
+volumes:
+  maven_repo:

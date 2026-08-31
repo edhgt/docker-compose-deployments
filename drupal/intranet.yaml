@@ -4,7 +4,7 @@ services:
     container_name: drupal_intranet
     image: drupal:11.3.2-php8.4-apache-bookworm
     ports:
-      - 80:80
+      - 8080:80
     volumes:
       - ./tzone.ini:/usr/local/etc/php/conf.d/tzone.ini:ro
       - ~/development/projects/php/intranet:/var/www/html
