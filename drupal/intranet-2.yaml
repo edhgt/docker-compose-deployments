@@ -7,7 +7,7 @@ services:
       - 8080:80
     volumes:
       - ./tzone.ini:/usr/local/etc/php/conf.d/tzone.ini:ro
-      - ~/development/projects/php/intranet:/var/www/html
+      #- ~/development/projects/php/intranet-2:/opt/drupal
       #- drupal_intranet:/var/www/html
       #- drupal:/var/www/html/modules
       #- drupal:/var/www/html/profiles
